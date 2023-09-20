@@ -166,7 +166,7 @@ useEffect(()=>{
       const subscription = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
-          timeInterval: 60000,
+          timeInterval: 1000,
           distanceInterval: 0.5,
         },
         (location) => {
