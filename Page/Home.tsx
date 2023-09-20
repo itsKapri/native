@@ -166,8 +166,8 @@ useEffect(()=>{
       const subscription = await Location.watchPositionAsync(
         {
           accuracy: Location.Accuracy.BestForNavigation,
-          timeInterval: 1000,
-          distanceInterval: 0.5,
+          timeInterval: 5000,
+          // distanceInterval: 0.5,
         },
         (location) => {
           const { latitude, longitude } = location.coords;

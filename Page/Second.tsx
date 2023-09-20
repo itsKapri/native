@@ -24,7 +24,9 @@ const Second = (props: {
       name: "Nallasopara",
     },
     { latitude: 19.427620, longitude: 72.841614, name: "santosh bhuvan" },
-    { latitude: 19.3826, longitude: 72.8320, name: "vasai road" },
+    { latitude: 19.4334, longitude: 72.8531565, name: "nallasopara middleway" },
+    { latitude:19.4379, longitude: 72.87032, name: "nallasopara highwayy" },
+
   ];
 
   const initialRegion = locationData
@@ -68,34 +70,44 @@ const Second = (props: {
           fixedLoc.longitude
         );
 
-        if (distance < 200 && distance > 0 && !alertShown.lessThan2m) {
-          setAlertShown({ ...alertShown, lessThan2m: true });
-          // Display an alert if the distance is less than 2 meters
+        // if (distance < 200 && distance > 0 && !alertShown.lessThan2m) {
+        //   setAlertShown({ ...alertShown, lessThan2m: true });
+        //   // Display an alert if the distance is less than 2 meters
+        //   Alert.alert(
+        //     "Alert",
+        //     `You are within 200 meters of ${fixedLoc.name}.`,
+        //     [
+        //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+        //     ]
+        //   );
+  
+        // } else if (distance <= 600 && distance > 200 && !alertShown.lessThan6m) {
+        //   setAlertShown({ ...alertShown, lessThan6m: true });
+        //   // Display an alert if the distance is between 2 and 6 meters
+        //   Alert.alert(
+        //     "Alert",
+        //     `You are within 600 meters of ${fixedLoc.name}.`,
+        //     [
+        //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+        //     ]
+        //   );
+        // } else if (distance <= 1000 && distance > 600 && !alertShown.lessThan10m) {
+        //   setAlertShown({ ...alertShown, lessThan10m: true });
+        //   // Display an alert if the distance is between 6 and 10 meters
+        //   Alert.alert(
+        //     "Alert",
+        //     `You are within 1km of ${fixedLoc.name}.`,
+        //     [{ text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) }]
+        //   );
+        // }
+        if (distance < 200) {
+          // Display an alert for each location within 200 meters
           Alert.alert(
             "Alert",
             `You are within 200 meters of ${fixedLoc.name}.`,
             [
               { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
             ]
-          );
-  
-        } else if (distance <= 600 && distance > 200 && !alertShown.lessThan6m) {
-          setAlertShown({ ...alertShown, lessThan6m: true });
-          // Display an alert if the distance is between 2 and 6 meters
-          Alert.alert(
-            "Alert",
-            `You are within 6 meters of ${fixedLoc.name}.`,
-            [
-              { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
-            ]
-          );
-        } else if (distance <= 1000 && distance > 600 && !alertShown.lessThan10m) {
-          setAlertShown({ ...alertShown, lessThan10m: true });
-          // Display an alert if the distance is between 6 and 10 meters
-          Alert.alert(
-            "Alert",
-            `You are within 10 meters of ${fixedLoc.name}.`,
-            [{ text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) }]
           );
         }
       });
