@@ -21,12 +21,11 @@ const Second = (props: {
     {
       latitude: 19.4177,
       longitude: 72.8189,
-      name: "Nallasopara",
+      name: "Nallasopara station",
     },
-    { latitude: 19.427620, longitude: 72.841614, name: "santosh bhuvan" },
-    { latitude: 19.4334, longitude: 72.8531565, name: "nallasopara middleway" },
-    { latitude:19.4379, longitude: 72.87032, name: "nallasopara highwayy" },
-
+    { latitude: 19.42762, longitude: 72.841614, name: "santosh bhuvan" },
+    { latitude: 19.4334, longitude: 72.8531565, name: "nallasopara Between" },
+    { latitude: 19.4379, longitude: 72.87032, name: "nallasopara highway" },
   ];
 
   const initialRegion = locationData
@@ -49,16 +48,104 @@ const Second = (props: {
         Math.sin(dLon / 2) *
         Math.sin(dLon / 2);
     const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    const distance = R * c; // Distance in meters
+    const distance = R * c;
     // console.log("distance----" + distance + "m");
     return distance;
   };
 
   const [alertShown, setAlertShown] = useState({
-    lessThan2m: false,
-    lessThan6m: false,
-    lessThan10m: false,
+    lessThan200m: false,
+    // lessThan600m: false,
+    // lessThan1km: false,
   });
+
+  // useEffect(() => {
+  //   if (locationData && fixedLocation) {
+  //     // console.log(`from use effect ${locationData}`);
+  //     fixedLocation.forEach((fixedLoc) => {
+  //       const distance = calculateDistanceInMeters(
+  //         locationData.latitude,
+  //         locationData.longitude,
+  //         fixedLoc.latitude,
+  //         fixedLoc.longitude
+  //       );
+
+  //       // if (distance < 200 && distance > 10 && !alertShown.lessThan200m) {
+  //       //   console.log(`You are within ${distance} meters of ${fixedLoc.name}.`)
+  //       //   setAlertShown({ ...alertShown, lessThan2m: true });
+  //       //   // Display an alert if the distance is less than 2 meters
+  //       //   Alert.alert(
+  //       //     "Alert",
+  //       //     `You are within 200 meters of ${fixedLoc.name}.`,
+  //       //     [
+  //       //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+  //       //     ]
+  //       //   );
+
+  //       // } else if (distance <= 600 && distance > 200 && !alertShown.lessThan600m) {
+  //       //   console.log(`You are within ${distance} meters of ${fixedLoc.name}.`)
+
+  //       //   setAlertShown({ ...alertShown, lessThan6m: true });
+  //       //   // Display an alert if the distance is between 2 and 6 meters
+  //       //   Alert.alert(
+  //       //     "Alert",
+  //       //     `You are within 600 meters of ${fixedLoc.name}.`,
+  //       //     [
+  //       //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+  //       //     ]
+  //       //   );
+  //       // } else if (distance <= 1000 && distance > 600 && !alertShown.lessThan1km) {
+  //       //   console.log(`You are within ${distance} meters of ${fixedLoc.name}.`)
+
+  //       //   setAlertShown({ ...alertShown, lessThan10m: true });
+  //       //   // Display an alert if the distance is between 6 and 10 meters
+
+  //       //   Alert.alert(
+  //       //     "Alert",
+  //       //     `You are within 1km of ${fixedLoc.name}.`,
+  //       //     [{ text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) }]
+  //       //   );
+
+  //       // }
+
+  //       // if (distance < 200 && !alertShown.lessThan200m) {
+  //       //   setAlertShown({ ...alertShown, lessThan200m: true });
+  //       //   // Display an alert for each location within 200 meters
+  //       //   Alert.alert(
+  //       //     "Alert",
+  //       //     `You are within 200 meters of ${fixedLoc.name}.`,
+  //       //     [
+  //       //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+  //       //     ]
+  //       //   );
+
+
+
+
+  //        if (distance < 200 && distance > 0 && !alertShown.lessThan200m) {
+  //         setAlertShown({ ...alertShown, lessThan200m: true });
+  //         Alert.alert(
+  //           "Alert",
+  //           `You are within 200 meters of ${fixedLoc.name}.`,
+  //           [
+  //             { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+  //           ]
+  //         );
+  //         const pay = {
+  //           appId: 12443,
+  //           appToken: "MMz84LRDrV9b81cJTQmRtr",
+  //           title: "Bus location",
+  //           body: `You are within ${distance} meters of ${fixedLoc.name}.`,
+  //           dateSent: new Date(),
+  //         };
+  //         axios.post("https://app.nativenotify.com/api/notification", pay);
+  //       }
+  //     });
+  //   }
+  // }, [locationData, fixedLocation, alertShown]);
+
+
+
 
   useEffect(() => {
     if (locationData && fixedLocation) {
@@ -69,56 +156,42 @@ const Second = (props: {
           fixedLoc.latitude,
           fixedLoc.longitude
         );
-
-        // if (distance < 200 && distance > 0 && !alertShown.lessThan2m) {
-        //   setAlertShown({ ...alertShown, lessThan2m: true });
-        //   // Display an alert if the distance is less than 2 meters
-        //   Alert.alert(
-        //     "Alert",
-        //     `You are within 200 meters of ${fixedLoc.name}.`,
-        //     [
-        //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
-        //     ]
-        //   );
   
-        // } else if (distance <= 600 && distance > 200 && !alertShown.lessThan6m) {
-        //   setAlertShown({ ...alertShown, lessThan6m: true });
-        //   // Display an alert if the distance is between 2 and 6 meters
-        //   Alert.alert(
-        //     "Alert",
-        //     `You are within 600 meters of ${fixedLoc.name}.`,
-        //     [
-        //       { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
-        //     ]
-        //   );
-        // } else if (distance <= 1000 && distance > 600 && !alertShown.lessThan10m) {
-        //   setAlertShown({ ...alertShown, lessThan10m: true });
-        //   // Display an alert if the distance is between 6 and 10 meters
-        //   Alert.alert(
-        //     "Alert",
-        //     `You are within 1km of ${fixedLoc.name}.`,
-        //     [{ text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) }]
-        //   );
-        // }
-        if (distance < 200) {
-          // Display an alert for each location within 200 meters
+        if (distance < 200 && distance > 0 && !alertShown[fixedLoc.name]) {
+          // Update the state for the specific location
+          setAlertShown({ ...alertShown, [fixedLoc.name]: true });
+          
+          // Display an alert
           Alert.alert(
             "Alert",
             `You are within 200 meters of ${fixedLoc.name}.`,
             [
-              { text: "OK", onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`) },
+              {
+                text: "OK",
+                onPress: () => console.log(`You are within ${distance} meters of ${fixedLoc.name}.`),
+              },
             ]
           );
+  
+          // Send a notification
+          const pay = {
+            appId: 12443,
+            appToken: "MMz84LRDrV9b81cJTQmRtr",
+            title: "Bus location",
+            body: `You are within ${distance} meters of ${fixedLoc.name}.`,
+            dateSent: new Date(),
+          };
+          axios.post("https://app.nativenotify.com/api/notification", pay);
         }
       });
     }
   }, [locationData, fixedLocation, alertShown]);
-
+  
   // Function to send location data to the server
   const sendLocationToServer = async (latitude, longitude) => {
     try {
       // Replace with your server's URL
-      const apiUrl = `https://loc-j3bu.onrender.com/api/user/${driverName}`;
+      const apiUrl = `https://loc-j3bu.onrender.com/api/user/${selectedBus}`;
       // Create the JSON payload
       const payload = JSON.stringify({
         latitude,
@@ -128,11 +201,11 @@ const Second = (props: {
       });
       const response = await axios.post(apiUrl, payload, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
       if (response.status === 201 || response.status === 200) {
-        console.log('Location data sent to server:', payload);
+        // console.log("Location data sent to server:", payload);
       } else {
         console.error('Error sending location data to server:', response.status);
       }
@@ -158,7 +231,11 @@ const Second = (props: {
         }}
       >
         <View style={styles.head_logo}>
-          <Image source={img_logo} style={styles.img_logo} resizeMode="contain" />
+          <Image
+            source={img_logo}
+            style={styles.img_logo}
+            resizeMode="contain"
+          />
         </View>
         <View
           style={{
@@ -176,7 +253,7 @@ const Second = (props: {
                 provider="google"
                 followsUserLocation={true}
                 initialRegion={initialRegion}
-                style={styles.map} // Updated style here
+                style={styles.map}
                 zoomEnabled={true}
               >
                 {/* Marker for fixed location */}
@@ -188,7 +265,13 @@ const Second = (props: {
                       longitude: loc.longitude,
                     }}
                     title={loc.name}
-                  />
+                  >
+                    <Image
+                      source={require("../assets/location-svgrepo-com.png")}
+                      style={{ height: 30, width: 20, borderRadius: 2 }}
+                      resizeMode="cover"
+                    />
+                  </Marker>
                 ))}
 
                 {/* Marker for user's location */}
@@ -201,12 +284,12 @@ const Second = (props: {
                   description={selectedBus}
                 >
                   <Image
-                    source={require("../assets/bus-svgrepo-com.png")}
-                    style={{ height: 20, width: 20, borderRadius: 2 }}
+                    source={require("../assets/pngwing.com.png")}
+                    style={{ height: 25, width: 25, borderRadius: 2 }}
                     resizeMode="cover"
                   />
                 </Marker>
-                {fixedLocation.map((loc, index) => (
+                {/* {fixedLocation.map((loc, index) => (
                   <Polyline
                     key={index}
                     coordinates={[
@@ -223,7 +306,7 @@ const Second = (props: {
                     strokeWidth={2}
                     lineDashPattern={[6, 3]}
                   />
-                ))}
+                ))} */}
               </MapView>
             </View>
           </View>
