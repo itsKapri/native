@@ -12,8 +12,7 @@ const Home = ({ navigation }) => {
   const [isTracking, setIsTracking] = useState(false);
   const [locationData, setLocationData] = useState(null);
   const [locationSubscription, setLocationSubscription] = useState(null);
-
-  // const [heading,setHeading]=useState(null)
+  const [heading,setHeading]=useState<number | null>(null)
   useEffect(() => {
     return () => {
       if (locationSubscription) {
@@ -28,7 +27,8 @@ useEffect(()=>{
     navigation.navigate("Second", {
           driverName: driverName,
           selectedBus: selectedBus,
-          locationData: locationData
+          locationData: locationData,
+          heading:heading
         });
   }
 },[driverName,selectedBus,locationData])
@@ -50,6 +50,9 @@ useEffect(()=>{
         },
         (location) => {
           const { latitude, longitude } = location.coords;
+          const head = location?.coords?.heading;
+          console.log("heading:-",head)
+          setHeading(head)
           setLocationData({ latitude, longitude });
           // console.log(`locationData.latitude-${latitude}, locationData.longitude-${longitude}`);
         }
@@ -59,6 +62,11 @@ useEffect(()=>{
       console.error("Error while tracking location:", error);
     }
   };
+
+
+//   useEffect(()=>{
+// console.log(heading)
+//   },[heading])
 
   const stopLocationTracking = () => {
     if (locationSubscription) {

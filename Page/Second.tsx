@@ -12,10 +12,11 @@ const Second = (props: {
       driverName: string;
       selectedBus: string;
       locationData: { latitude: number; longitude: number };
+      heading:number
     };
   };
 }) => {
-  const { driverName, selectedBus, locationData } = props.route.params;
+  const { driverName, selectedBus, locationData, heading} = props.route.params;
 
   const fixedLocation = [
     {
@@ -198,6 +199,7 @@ const Second = (props: {
         longitude,
         driverName,
         busNumber: selectedBus,
+        heading:heading
       });
       const response = await axios.post(apiUrl, payload, {
         headers: {
